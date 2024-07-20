@@ -7,6 +7,7 @@ import time
 from django.db import models
 
 class CommandException(models.Model):
+    id = models.AutoField(primary_key=True)
     command = models.CharField(max_length=255)
     exc_class = models.CharField(max_length=255, verbose_name="Class")
     exc_message = models.TextField(verbose_name="Message")

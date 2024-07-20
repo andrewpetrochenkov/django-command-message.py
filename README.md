@@ -8,6 +8,11 @@ $ pip install django-command-exception
 INSTALLED_APPS+=['django_command_exception']
 ```
 
+#### `migrate`
+```bash
+$ python manage.py migrate
+```
+
 ### Models
 model|table|columns/fields
 -|-|-
