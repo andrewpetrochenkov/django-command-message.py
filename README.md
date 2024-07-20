@@ -14,7 +14,7 @@ $ python manage.py migrate
 ```
 
 ### Features
-+   database messages
++   database
 +   admin
 +   print message if `settings.DEBUG==True`
 
@@ -24,11 +24,11 @@ model|table|columns/fields
 `Command`|`django_command_message`|`id`,`command`,`message`,`created_at`
 
 ### Examples
-`MessageMixin`
+`CommandMessageMixin`
 ```python
-from django_command_message.mixins import MessageMixin
+from django_command_message.mixins import CommandMessageMixin
 
-class Command(MessageMixin,BaseCommand):
+class Command(CommandMessageMixin,BaseCommand):
     def handle(self, *args, **options):
         self.message('message')
 ```
