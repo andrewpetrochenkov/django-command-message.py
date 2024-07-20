@@ -3,16 +3,14 @@ from datetime import datetime
 from django.contrib import admin
 from django.utils.timesince import timesince
 
-from .models import CommandException as Model
+from .models import Message as Model
 
 
 class ModelAdmin(admin.ModelAdmin):
     fields = [
         "id",
         "command",
-        "exc_class",
-        "exc_message",
-        "exc_traceback",
+        "message",
         "created_at",
         "time",
         "timesince",
@@ -20,20 +18,16 @@ class ModelAdmin(admin.ModelAdmin):
     list_display = [
         "id",
         "command",
-        "exc_class",
-        "exc_message",
+        "message",
         "time",
         "timesince",
     ]
     list_filter = [
-        "exc_class",
         "command",
     ]
     search_fields = [
         "command",
-        "exc_class",
-        "exc_message",
-        "exc_traceback",
+        "message",
     ]
 
     def time(self, obj):

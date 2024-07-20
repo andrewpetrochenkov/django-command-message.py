@@ -1,11 +1,11 @@
 ### Installation
 ```bash
-$ pip install django-command-exception
+$ pip install django-command-message
 ```
 
 #### `settings.py`
 ```python
-INSTALLED_APPS+=['django_command_exception']
+INSTALLED_APPS+=['django_command_message']
 ```
 
 #### `migrate`
@@ -13,31 +13,30 @@ INSTALLED_APPS+=['django_command_exception']
 $ python manage.py migrate
 ```
 
+### Features
++   database messages
++   admin
++   print message if `settings.DEBUG==True`
+
 ### Models
 model|table|columns/fields
 -|-|-
-`CommandException`|`django_command_exception`|id,command,exc_class,exc_message,exc_traceback,created_at
+`Command`|`django_command_message`|`id`,`command`,`message`,`created_at`
 
 ### Examples
-`call_command`
+`MessageMixin`
 ```python
-from django_command_exception.models import CommandException
+from django_command_message.mixins import MessageMixin
 
-try:
-    call_command(name)
-except Exception as e:
-    CommandException(command=name).save()
+class Command(MessageMixin,BaseCommand):
+    def handle(self, *args, **options):
+        self.message('message')
 ```
 
-`BaseCommand`
+`Message` model
 ```python
-from django_command_exception.models import CommandException
+from django_command_message.models import Message
 
-class BaseCommand(BaseCommand):
-    def execute(self, *args, **options):
-        try:
-            return super().execute(*args, **options)
-        except Exception as e:
-            CommandException(command=type(self).__module__.split('.')[-1]).save()
+Message(command='name',message="message").save()
 ```
 
